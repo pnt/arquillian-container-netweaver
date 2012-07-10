@@ -1,0 +1,314 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://sap.com/2009/11/24/deployws" targetNamespace="http://sap.com/2009/11/24/deployws">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sap.com/2009/11/24/deployws" version="1.0">
+<xs:element name="DeployFault" type="tns:DeployFault"/>
+<xs:element name="deploy" type="tns:deploy"/>
+<xs:element name="deployLocal" type="tns:deployLocal"/>
+<xs:element name="deployLocalResponse" type="tns:deployLocalResponse"/>
+<xs:element name="deployResponse" type="tns:deployResponse"/>
+<xs:element name="getApplications" type="tns:getApplications"/>
+<xs:element name="getApplicationsResponse" type="tns:getApplicationsResponse"/>
+<xs:element name="getVersion" type="tns:getVersion"/>
+<xs:element name="getVersionResponse" type="tns:getVersionResponse"/>
+<xs:element name="start" type="tns:start"/>
+<xs:element name="startResponse" type="tns:startResponse"/>
+<xs:element name="stop" type="tns:stop"/>
+<xs:element name="stopResponse" type="tns:stopResponse"/>
+<xs:element name="undeploy" type="tns:undeploy"/>
+<xs:element name="undeployResponse" type="tns:undeployResponse"/>
+<xs:complexType name="stop">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="apps" type="tns:application"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="application">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="location" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="status" type="xs:string"/>
+<xs:element minOccurs="0" name="vendor" type="xs:string"/>
+<xs:element minOccurs="0" name="version" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="option">
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:anyType"/>
+<xs:element minOccurs="0" name="value" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="stopResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:application"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeployFault">
+<xs:sequence>
+<xs:element minOccurs="0" name="fullStackTrace" type="xs:string"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deployLocal">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="archivePaths" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deployLocalResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:deployResult"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deployResult">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="applications" nillable="true" type="tns:application"/>
+<xs:element minOccurs="0" name="status" type="xs:string"/>
+<xs:element minOccurs="0" name="statusDetails" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="undeploy">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="apps" type="tns:application"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="undeployResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:deployResult"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deploy">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="archiveFiles" type="tns:archiveFile"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="archiveFile">
+<xs:sequence>
+<xs:element minOccurs="0" name="content" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="fileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deployResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:deployResult"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="start">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="apps" type="tns:application"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="startResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:application"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getApplications">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="options" type="tns:option"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getApplicationsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:application"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getVersion">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getVersionResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="stopIn">
+<wsdl:part element="tns:stop" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="stopOut">
+<wsdl:part element="tns:stopResponse" name="stopResponse"/>
+</wsdl:message>
+<wsdl:message name="stopFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="deployLocalIn">
+<wsdl:part element="tns:deployLocal" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="deployLocalOut">
+<wsdl:part element="tns:deployLocalResponse" name="deployLocalResponse"/>
+</wsdl:message>
+<wsdl:message name="deployLocalFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="undeployIn">
+<wsdl:part element="tns:undeploy" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="undeployOut">
+<wsdl:part element="tns:undeployResponse" name="undeployResponse"/>
+</wsdl:message>
+<wsdl:message name="undeployFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="deployIn">
+<wsdl:part element="tns:deploy" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="deployOut">
+<wsdl:part element="tns:deployResponse" name="deployResponse"/>
+</wsdl:message>
+<wsdl:message name="deployFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="startIn">
+<wsdl:part element="tns:start" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="startOut">
+<wsdl:part element="tns:startResponse" name="startResponse"/>
+</wsdl:message>
+<wsdl:message name="startFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="getApplicationsIn">
+<wsdl:part element="tns:getApplications" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="getApplicationsOut">
+<wsdl:part element="tns:getApplicationsResponse" name="getApplicationsResponse"/>
+</wsdl:message>
+<wsdl:message name="getApplicationsFault">
+<wsdl:part element="tns:DeployFault" name="DeployFault"/>
+</wsdl:message>
+<wsdl:message name="getVersionIn">
+<wsdl:part element="tns:getVersion" name="parameters"/>
+</wsdl:message>
+<wsdl:message name="getVersionOut">
+<wsdl:part element="tns:getVersionResponse" name="getVersionResponse"/>
+</wsdl:message>
+<wsdl:portType name="DeployWSPortType">
+<wsdl:operation name="stop" parameterOrder="parameters">
+<wsdl:input message="tns:stopIn"/>
+<wsdl:output message="tns:stopOut"/>
+<wsdl:fault message="tns:stopFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="deployLocal" parameterOrder="parameters">
+<wsdl:input message="tns:deployLocalIn"/>
+<wsdl:output message="tns:deployLocalOut"/>
+<wsdl:fault message="tns:deployLocalFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="undeploy" parameterOrder="parameters">
+<wsdl:input message="tns:undeployIn"/>
+<wsdl:output message="tns:undeployOut"/>
+<wsdl:fault message="tns:undeployFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="deploy" parameterOrder="parameters">
+<wsdl:input message="tns:deployIn"/>
+<wsdl:output message="tns:deployOut"/>
+<wsdl:fault message="tns:deployFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="start" parameterOrder="parameters">
+<wsdl:input message="tns:startIn"/>
+<wsdl:output message="tns:startOut"/>
+<wsdl:fault message="tns:startFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="getApplications" parameterOrder="parameters">
+<wsdl:input message="tns:getApplicationsIn"/>
+<wsdl:output message="tns:getApplicationsOut"/>
+<wsdl:fault message="tns:getApplicationsFault" name="DeployFault"/>
+</wsdl:operation>
+<wsdl:operation name="getVersion" parameterOrder="parameters">
+<wsdl:input message="tns:getVersionIn"/>
+<wsdl:output message="tns:getVersionOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="DeployWSPortTypeBinding" type="tns:DeployWSPortType">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="stop">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="deployLocal">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="undeploy">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="deploy">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="start">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getApplications">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="DeployFault">
+<soap:fault name="DeployFault" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getVersion">
+<soap:operation soapAction=""/>
+<wsdl:input>
+<soap:body parts="parameters" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="DeployWSService">
+<wsdl:port binding="tns:DeployWSPortTypeBinding" name="DeployWSPort">
+<soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://vepo05029.dhcp.wdf.sap.corp:50000/DeployWSService/DeployWS"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
