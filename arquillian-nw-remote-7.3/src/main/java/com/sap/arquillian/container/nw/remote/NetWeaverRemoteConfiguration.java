@@ -12,13 +12,13 @@ public class NetWeaverRemoteConfiguration implements ContainerConfiguration {
 	private String wsNamespace = "http://sap.com/2009/11/24/deployws";
 	private String wsPortName = "DeployWSPortType";
 
-	private String bindAddress = "vecb731S3V001.dhcp.wdf.sap.corp";
+	private String bindAddress = "test";
 
 	private int bindHttpPort = 50000;
 
-	private String user = "administrator";
+	private String user = "testuser";
 
-	private String pass = "abcd1234";
+	private String pass = "testpass";
 
 	private String urlCharset = "ISO-8859-1";
 
