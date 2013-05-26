@@ -19,12 +19,10 @@ public class FirstTest {
 
 	@EJB
 	InfoProviderLocal info;
-	
+
 	@Deployment
 	public static JavaArchive createDeployment() {
-		return ShrinkWrap
-				.create(JavaArchive.class,
-						"FirstTest.jar")
+		return ShrinkWrap.create(JavaArchive.class, "FirstTest.jar")
 				.addClasses(InfoProvider.class, InfoProviderLocal.class);
 	}
 
